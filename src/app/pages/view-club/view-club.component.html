@@ -1,0 +1,88 @@
+<mat-toolbar>
+    <span>{{currentClub?.shortName}}</span>
+    <span style="flex: 1 1 auto;" ></span>
+    <button mat-flat-button color="primary" (click)="SignOut()" >Sign Out</button>
+</mat-toolbar>
+<mat-tab-group>
+    <mat-tab label="Fields" >
+        <mat-form-field >
+            <mat-label>Field Name</mat-label>
+            <input matInput [formControl]="fieldName"  value="">
+        </mat-form-field>
+        <mat-form-field >
+            <mat-label>Address</mat-label>
+            <input matInput [formControl]="fieldAddress"  value="">
+        </mat-form-field>
+        <mat-form-field >
+            <mat-label>Description</mat-label>
+            <input matInput [formControl]="fieldDescription"  value="">
+        </mat-form-field>
+        <mat-form-field >
+            <mat-label>Facilities</mat-label>
+            <input matInput [formControl]="fieldFacilities"  value="">
+        </mat-form-field>
+        <mat-form-field >
+            <mat-label>Deck Type</mat-label>
+            <input matInput [formControl]="fieldDeckType"  value="">
+        </mat-form-field>
+        <mat-checkbox [formControl]="hasLighting"> Has Lighting</mat-checkbox>
+        <mat-checkbox [formControl]="hasHeating"> Has Heating</mat-checkbox>
+        <button mat-flat-button color="primary" (click)="CreateField()" >Create</button>
+    </mat-tab>
+    <mat-tab label="Teams" >
+        <mat-form-field >
+            <mat-label>Name</mat-label>
+            <input matInput [formControl]="teamName"  value="">
+        </mat-form-field>
+        <mat-form-field >
+            <mat-label>Member Type</mat-label>
+            <input matInput [formControl]="teamMemberType"  value="">
+        </mat-form-field>
+        <mat-form-field >
+            <mat-label>Birth Year</mat-label>
+            <input matInput [formControl]="teamBirthYear"  value="">
+        </mat-form-field>
+        <button mat-flat-button color="primary" (click)="CreateTeam()" >Create Team</button>
+    </mat-tab>
+    <mat-tab label="Users">
+        <mat-form-field >
+            <mat-label>User Email</mat-label>
+            <input matInput type="email" [formControl]="userEmail" placeholder="someone@gmail.com" value="">
+        </mat-form-field>
+        <mat-form-field>
+            <mat-label>Select Role</mat-label>
+            <mat-select [formControl]="userRole" >
+              <mat-option value="Super Admin">Super Admin</mat-option>
+              <mat-option value="Club Admin">Club Admin</mat-option>
+              <mat-option value="Field Admin">Field Admin</mat-option>
+              <mat-option value="Team Manager">Team Manager</mat-option>
+            </mat-select>
+          </mat-form-field>
+          <button mat-flat-button color="primary" (click)="CreateUser()" >Create User</button>
+        <table mat-table [dataSource]="clubUsers" class="mat-elevation-z8" >
+            <ng-container matColumnDef="id">
+                <th mat-header-cell *matHeaderCellDef> ID </th>
+                <td mat-cell *matCellDef="let element"> {{element.id}} </td>
+            </ng-container>
+            <ng-container matColumnDef="firstName">
+                <th mat-header-cell *matHeaderCellDef> First Name </th>
+                <td mat-cell *matCellDef="let element"> {{element.firstName}} </td>
+            </ng-container>
+            <ng-container matColumnDef="lastName">
+                <th mat-header-cell *matHeaderCellDef> Last Name </th>
+                <td mat-cell *matCellDef="let element"> {{element.lastName}} </td>
+            </ng-container>
+            <ng-container matColumnDef="email">
+                <th mat-header-cell *matHeaderCellDef> E - Mail </th>
+                <td mat-cell *matCellDef="let element"> {{element.email}} </td>
+            </ng-container>
+            <ng-container matColumnDef="role">
+                <th mat-header-cell *matHeaderCellDef> Role </th>
+                <td mat-cell *matCellDef="let element"> {{getUserRole(element)}} </td>
+            </ng-container>
+
+            <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+            <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+        </table>
+    </mat-tab>
+</mat-tab-group>
