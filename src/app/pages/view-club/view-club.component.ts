@@ -33,6 +33,8 @@ export class ViewClubComponent implements OnInit {
   clubTeams : Team[] = []
   clubFields : Field[] = []
   displayedColumns: string[] = ['id','firstName','lastName','email','role'];
+  fieldDisplayedColumns: string[] = ['id','name','address','description','facilities','deckType','HasLighting','HasHeating','actions'];
+  teamDisplayedColumns: string[] = ['id','name','memberType','birthYear'];
 
   fieldName = new FormControl('')
   fieldDescription = new FormControl('')
@@ -91,6 +93,10 @@ export class ViewClubComponent implements OnInit {
         console.error(error)
       }
     })
+  }
+
+  ViewField(field : Field){
+    this.router.navigate(['fields',field.id])
   }
 
   RefreshUsers(){

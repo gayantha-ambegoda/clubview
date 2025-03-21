@@ -14,7 +14,7 @@ export const routes: Routes = [
         component:DashboardComponent,
         canActivate: [authGuard]
     },{
-        path:'fields',
+        path:'fields/:id',
         component:FieldsComponent,
         canActivate: [authGuard]
     },{
