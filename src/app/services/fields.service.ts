@@ -16,4 +16,8 @@ export class FieldsService {
   GetFieldsByClub(clubId : number){
     return this.http.get<Field[]>(`Fields/FieldsByClub/${clubId}`);
   }
+
+  GetField(id : number){
+    return this.http.get<Field>(`Fields/${id}`)
+  }
 }

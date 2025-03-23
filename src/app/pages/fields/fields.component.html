@@ -1,2 +1,35 @@
-<p>fields works! {{selectedField}}</p>
+<mat-form-field >
+    <mat-label>Part Name</mat-label>
+    <input matInput [formControl]="partName"  value="">
+</mat-form-field>
+<mat-checkbox [formControl]="isAutoApprove"> Auto Approve</mat-checkbox>
+<button mat-flat-button color="primary" (click)="CreatePart()" >Create</button>
+<mat-form-field>
+    <mat-label>Select Part</mat-label>
+    <mat-select (selectionChange)="onSelectChange()" [formControl]="selectedPart" >
+      @for (part of fieldParts; track $index) {
+        <mat-option [value]="part.id">{{part.name}}</mat-option>
+      }
+    </mat-select>
+  </mat-form-field>
+  <mat-form-field>
+    <mat-label>Select Date</mat-label>
+    <input matInput [matDatepicker]="picker1" [formControl]="bookingDate">
+    <mat-hint>MM/DD/YYYY</mat-hint>
+    <mat-datepicker-toggle matIconSuffix [for]="picker1"></mat-datepicker-toggle>
+    <mat-datepicker #picker1></mat-datepicker>
+  </mat-form-field>
+  <mat-form-field>
+    <mat-label>From Time</mat-label>
+    <input [formControl]="startTime" matInput [matTimepicker]="picker">
+    <mat-timepicker-toggle matIconSuffix [for]="picker"/>
+    <mat-timepicker #picker/>
+  </mat-form-field>
+  <mat-form-field>
+    <mat-label>To time</mat-label>
+    <input [formControl]="endTime" matInput [matTimepicker]="picker2">
+    <mat-timepicker-toggle matIconSuffix [for]="picker2"/>
+    <mat-timepicker #picker2/>
+  </mat-form-field>
+  <button mat-flat-button color="primary" (click)="BookNow()" >Book</button>
 <app-calender [events]="calendarEvents" ></app-calender>
