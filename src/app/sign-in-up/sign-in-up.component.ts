@@ -8,6 +8,7 @@ import { UserService } from '../services/user.service';
 import { FormsModule } from '@angular/forms';
 import { SignInRequest } from '../models/sign-in-request';
 import { User } from '../models/user';
+import {MatSnackBar} from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-sign-in-up',
@@ -19,6 +20,7 @@ export class SignInUpComponent {
   public isSignIn : boolean = true
   private readonly router = inject(Router)
   private readonly userService = inject(UserService)
+  private _snackBar = inject(MatSnackBar)
 
   firstName : string = ''
   lastName : string = ''
@@ -34,7 +36,9 @@ export class SignInUpComponent {
             this.router.navigate(['dashboard'])
         },
         error: (error) => {
-          console.error(error)
+          this._snackBar.open("Sign In Error Occured!","",{
+            duration:3000
+          })
         }
       })
     }else{
@@ -50,7 +54,9 @@ export class SignInUpComponent {
           this.router.navigate(['dashboard'])
         },
         error:(error) => {
-          console.error(error)
+          this._snackBar.open("Sign Up Error Occured!","",{
+            duration:3000
+          })
         }
       })
     }
