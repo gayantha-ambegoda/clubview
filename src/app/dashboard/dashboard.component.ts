@@ -11,10 +11,11 @@ import { ClubService } from '../services/club.service';
 import { Router } from '@angular/router';
 import { User } from '../models/user';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import {MatSidenavModule} from '@angular/material/sidenav';
 
 @Component({
   selector: 'app-dashboard',
-  imports: [MatTableModule,MatIconModule,MatButtonModule,MatToolbarModule,MatInputModule,MatFormFieldModule,FormsModule],
+  imports: [MatTableModule,MatSidenavModule,MatIconModule,MatButtonModule,MatToolbarModule,MatInputModule,MatFormFieldModule,FormsModule],
   templateUrl: './dashboard.component.html',
   styleUrl: './dashboard.component.css'
 })

@@ -17,11 +17,12 @@ import {MatSelectModule} from '@angular/material/select';
 import { Field } from '../../models/fields';
 import { FieldsService } from '../../services/fields.service';
 import { Team } from '../../models/team';
+import {MatCardModule} from '@angular/material/card';
 import { TeamsService } from '../../services/teams.service';
 
 @Component({
   selector: 'app-view-club',
-  imports: [MatIconModule,MatButtonModule,MatToolbarModule,MatTabsModule,MatTableModule,MatInputModule,MatFormFieldModule,FormsModule,MatSelectModule,ReactiveFormsModule,MatCheckboxModule],
+  imports: [MatIconModule,MatCardModule,MatButtonModule,MatToolbarModule,MatTabsModule,MatTableModule,MatInputModule,MatFormFieldModule,FormsModule,MatSelectModule,ReactiveFormsModule,MatCheckboxModule],
   templateUrl: './view-club.component.html',
   styleUrl: './view-club.component.css'
 })
