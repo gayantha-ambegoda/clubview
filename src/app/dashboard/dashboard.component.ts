@@ -10,6 +10,7 @@ import {FormsModule} from '@angular/forms';
 import { ClubService } from '../services/club.service';
 import { Router } from '@angular/router';
 import { User } from '../models/user';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-dashboard',
@@ -23,6 +24,7 @@ export class DashboardComponent implements OnInit {
 
   private clubService : ClubService = inject(ClubService)
   private router : Router = inject(Router)
+  private _snackBar : MatSnackBar = inject(MatSnackBar)
 
   public name : string = ""
   public shortName : string = ""
@@ -47,7 +49,9 @@ export class DashboardComponent implements OnInit {
         this.RefreshClubs()
       },
       error:(error)=>{
-        console.error(error)
+        this._snackBar.open("Cannot Create Club","",{
+          duration:3000
+        })
       }
     })
   }
@@ -58,7 +62,9 @@ export class DashboardComponent implements OnInit {
         this.dataSource = response
       },
       error:(error)=>{
-        console.log(error)
+        this._snackBar.open("Error RRetrieving Clubs","",{
+          duration:3000
+        })
       }
     })
   }
@@ -73,7 +79,9 @@ export class DashboardComponent implements OnInit {
         this.RefreshClubs()
       },
       error:(error)=>{
-        console.error(error)
+        this._snackBar.open("Error Deleting Clubs","",{
+          duration:3000
+        })
       }
     })
   }
