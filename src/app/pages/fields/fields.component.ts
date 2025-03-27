@@ -23,6 +23,7 @@ import {MatCardModule} from '@angular/material/card';
 import {MatSidenavModule} from '@angular/material/sidenav';
 import {MatToolbarModule} from '@angular/material/toolbar';
 import {MatIconModule} from '@angular/material/icon';
+import {MatSnackBar} from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-fields',
@@ -41,6 +42,7 @@ export class FieldsComponent implements OnInit {
   private readonly fieldService = inject(FieldsService)
   private readonly fieldPartService = inject(FieldPartsService)
   private readonly bookingService = inject(BookingService)
+  private _snackBar = inject(MatSnackBar)
   selectedField : number = 0
   calendarEvents : CalendarEvent[] = []
   fielddetails : Field = new Field()
@@ -138,15 +140,35 @@ export class FieldsComponent implements OnInit {
       field: this.fielddetails
     } as FieldPart).subscribe({
       next:(response)=>{
-        console.log(response)
+        this._snackBar.open("Successfully Created!","",{duration:3000})
         this.GetFieldParts()
       }, error:(error)=>{
-        console.error(error)
+        this._snackBar.open("Error Occured While Saving Part!","",{duration:3000})
       }
     })
   }
 
   BookNow(){
+
+    if(this.selectedPart.value == null || this.selectedPart.value == 0 || this.selectedPart.value == undefined){
+      this._snackBar.open("Please select a part to book","",{
+        duration:3000
+      })
+      return
+    }
+
+    if(this.bookingDate.value == null || this.bookingDate.value == undefined){
+      this._snackBar.open("Please select a date to book","",{
+        duration:3000
+      })
+      return
+    }
+    var nows = new Date();
+    if(nows > this.bookingDate.value){
+      this._snackBar.open("Please select a future date to book","",{duration:3000})
+      return
+    }
+
     var bookYr: number = this.bookingDate.value?.getFullYear() ?? 2025;
     var bookMth: number = this.bookingDate.value?.getMonth() ?? 3;
     var bookDay: number = (this.bookingDate.value?.getDate() ?? 2) + 1;
@@ -180,6 +202,7 @@ export class FieldsComponent implements OnInit {
     console.log(request);
     this.bookingService.SaveBooking(request).subscribe({
       next: (response) => {
+        this._snackBar.open("Booking Success!","",{duration:3000})
       this.GetBookingsByPart();
       },
       error: (error) => {

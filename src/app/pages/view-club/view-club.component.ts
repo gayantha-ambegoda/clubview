@@ -19,6 +19,7 @@ import { FieldsService } from '../../services/fields.service';
 import { Team } from '../../models/team';
 import {MatCardModule} from '@angular/material/card';
 import { TeamsService } from '../../services/teams.service';
+import {MatSnackBar} from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-view-club',
@@ -36,6 +37,7 @@ export class ViewClubComponent implements OnInit {
   displayedColumns: string[] = ['id','firstName','lastName','email','role'];
   fieldDisplayedColumns: string[] = ['id','name','address','description','facilities','deckType','HasLighting','HasHeating','actions'];
   teamDisplayedColumns: string[] = ['id','name','memberType','birthYear'];
+  private _snackBar = inject(MatSnackBar)
 
   fieldName = new FormControl('')
   fieldDescription = new FormControl('')
@@ -148,11 +150,18 @@ export class ViewClubComponent implements OnInit {
 
       this.clubservice.AssignClubUsers(request).subscribe({
         next:(response) => {
-          console.log(response)
           this.RefreshUsers()
         },
         error:(error)=>{
-          console.error(error)
+          if(error.status == 404){
+            this._snackBar.open("User Not Found!","",{
+              duration:3000
+            })
+          }else{
+            this._snackBar.open("Something Went Wrong!","",{
+              duration:3000
+            })
+          }
         }
       })
     }
