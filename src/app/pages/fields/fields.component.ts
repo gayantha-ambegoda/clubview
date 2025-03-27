@@ -20,12 +20,16 @@ import {MatDatepickerModule} from '@angular/material/datepicker';
 import { Booking } from '../../models/booking';
 import { BookingService } from '../../services/booking.service';
 import {MatCardModule} from '@angular/material/card';
+import {MatSidenavModule} from '@angular/material/sidenav';
+import {MatToolbarModule} from '@angular/material/toolbar';
+import {MatIconModule} from '@angular/material/icon';
 
 @Component({
   selector: 'app-fields',
   imports: [
-    UiComponentModule,MatButtonModule,MatInputModule,MatFormFieldModule,FormsModule,MatSelectModule,
-    ReactiveFormsModule,MatCheckboxModule,MatTimepickerModule,MatDatepickerModule,MatCardModule
+    UiComponentModule,MatButtonModule,MatInputModule,MatFormFieldModule,FormsModule,MatSelectModule,MatToolbarModule,
+    ReactiveFormsModule,MatCheckboxModule,MatTimepickerModule,MatDatepickerModule,MatCardModule,MatSidenavModule,
+    MatIconModule
   ],
   providers:[provideNativeDateAdapter()],
   templateUrl: './fields.component.html',
